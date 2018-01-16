@@ -1,0 +1,34 @@
+package br.com.marcelo.marsrover.rover;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class SouthTest {
+	
+	South sul;
+	
+	@Before
+	public void setup() {
+		sul = new South();
+	}
+
+	@Test
+	public void deveMostrarValorPadraoSul() {
+		assertEquals(TipoDirecao.S, sul.getTipoDirecao());
+	}
+	
+	@Test
+	public void deveVirarADireitaParaOeste() {
+		Direcao direcao = sul.viraADireita();
+		assertEquals(TipoDirecao.W, direcao.getTipoDirecao());
+	}
+	
+	@Test
+	public void deveVirarAEsquerdaParaLeste() {
+		Direcao direcao = sul.viraAEsquerda();
+		assertEquals(TipoDirecao.E, direcao.getTipoDirecao());
+	}
+
+}
