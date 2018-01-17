@@ -4,10 +4,12 @@ public class Rover {
 
 	private Coordenada coordenada;
 	private Direcao direcao;
+	private Planalto planalto;
 
-	public Rover(Coordenada coordenada, Direcao direcao) {
+	public Rover(Coordenada coordenada, Direcao direcao, Planalto planalto) {
 		this.coordenada = coordenada;
 		this.direcao = direcao;
+		this.planalto = planalto;
 	}
 
 	public Direcao getDirecao() {
@@ -27,4 +29,16 @@ public class Rover {
 		return sb.toString();
 	}
 
+	public void viraADireita() {
+		direcao = direcao.viraADireita();
+	}
+
+	public void viraAEsquerda() {
+		direcao = direcao.viraAEsquerda();
+	}
+
+	public void moveAFrente() {
+		
+		
+	}
 }
