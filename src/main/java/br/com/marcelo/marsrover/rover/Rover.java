@@ -20,6 +20,14 @@ public class Rover {
 		this.direcao = direcao;
 	}
 
+	public Coordenada getCoordenada() {
+		return coordenada;
+	}
+
+	public void setCoordenada(Coordenada coordenada) {
+		this.coordenada = coordenada;
+	}
+
 	public String getPosicao() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(coordenada);
@@ -38,7 +46,8 @@ public class Rover {
 	}
 
 	public void moveAFrente() {
+//		planalto.isMovimentacaoPossivel(coordenada);
 		direcao.movimenta(coordenada);
-		
+
 	}
 }

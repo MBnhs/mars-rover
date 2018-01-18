@@ -11,7 +11,7 @@ public class RoverTest {
 
 	@Before
 	public void setup() {
-		rover = new Rover(new Coordenada(1, 2), new North(), new Planalto());
+		rover = new Rover(new Coordenada(1, 2), new North(), new Planalto(5, 5));
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class RoverTest {
 		rover.moveAFrente();
 		assertEquals("1 3 N", rover.getPosicao());
 		
-		rover = new Rover(new Coordenada(3, 3), new East(), new Planalto());
+		rover = new Rover(new Coordenada(3, 3), new East(), new Planalto(5, 5));
 		rover.moveAFrente();
 		rover.moveAFrente();
 		rover.viraADireita();
@@ -77,5 +77,32 @@ public class RoverTest {
 		
 	}
 
+	@Test
+	public void deveMoverPosicao2() {
+		rover.viraAEsquerda();
+		rover.moveAFrente();
+		rover.viraAEsquerda();
+		rover.moveAFrente();
+		rover.viraAEsquerda();
+		rover.moveAFrente();
+		rover.viraAEsquerda();
+		rover.moveAFrente();
+		rover.moveAFrente();
+		assertEquals("1 3 N", rover.getPosicao());
+		
+		rover = new Rover(new Coordenada(3, 3), new East(), new Planalto(5, 5));
+		rover.moveAFrente();
+		rover.moveAFrente();
+		rover.viraADireita();
+		rover.moveAFrente();
+		rover.moveAFrente();
+		rover.viraADireita();
+		rover.moveAFrente();
+		rover.viraADireita();
+		rover.viraADireita();
+		rover.moveAFrente();
 	
+		assertEquals("5 1 E", rover.getPosicao());
+		
+	}
 }
