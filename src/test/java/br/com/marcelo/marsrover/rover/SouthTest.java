@@ -30,5 +30,12 @@ public class SouthTest {
 		Direcao direcao = sul.viraAEsquerda();
 		assertEquals(TipoDirecao.E, direcao.getTipoDirecao());
 	}
+	
+	@Test
+	public void deveSeMoverParaOSul() {
+		Coordenada coordenada = new Coordenada(0, 0);
+		sul.movimenta(coordenada);
+		assertEquals("0 -1", coordenada.toString());
+	}
 
 }

@@ -14,4 +14,8 @@ public class East implements Direcao {
 		return TipoDirecao.E;
 	}
 
+	public void movimenta(Coordenada coordenada) {
+		coordenada.moveEixoX(TipoMovimento.POSITIVO);
+	}
+
 }

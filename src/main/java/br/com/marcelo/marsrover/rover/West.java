@@ -14,4 +14,8 @@ public class West implements Direcao {
 		return TipoDirecao.W;
 	}
 
+	public void movimenta(Coordenada coordenada) {
+		coordenada.moveEixoX(TipoMovimento.NEGATIVO);
+	}
+
 }

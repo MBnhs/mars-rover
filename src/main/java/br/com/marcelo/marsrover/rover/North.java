@@ -12,9 +12,13 @@ public class North implements Direcao {
 	public Direcao viraAEsquerda() {
 		return new West();
 	}
-	
+
 	public TipoDirecao getTipoDirecao() {
 		return tipoDirecao;
+	}
+
+	public void movimenta(Coordenada coordenada) {
+		coordenada.moveEixoY(TipoMovimento.POSITIVO);
 	}
 
 }

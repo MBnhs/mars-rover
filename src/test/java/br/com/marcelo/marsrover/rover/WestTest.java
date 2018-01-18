@@ -30,5 +30,12 @@ public class WestTest {
 		Direcao direcao = oeste.viraAEsquerda();
 		assertEquals(TipoDirecao.S, direcao.getTipoDirecao());
 	}
+	
+	@Test
+	public void deveSeMoverParaOOeste() {
+		Coordenada coordenada = new Coordenada(0, 0);
+		oeste.movimenta(coordenada);
+		assertEquals("-1 0", coordenada.toString());
+	}
 
 }

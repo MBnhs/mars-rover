@@ -38,7 +38,7 @@ public class Rover {
 	}
 
 	public void moveAFrente() {
-		
+		direcao.movimenta(coordenada);
 		
 	}
 }

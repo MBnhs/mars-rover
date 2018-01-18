@@ -14,4 +14,8 @@ public class South implements Direcao {
 		return TipoDirecao.S;
 	}
 
+	public void movimenta(Coordenada coordenada) {
+		coordenada.moveEixoY(TipoMovimento.NEGATIVO);
+	}
+
 }

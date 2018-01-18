@@ -15,4 +15,12 @@ public class Coordenada {
 		return x + " " + y;
 	}
 
+	public void moveEixoX(TipoMovimento tipoMovimento) {
+		x += tipoMovimento.getValor();
+	}
+
+	public void moveEixoY(TipoMovimento tipoMovimento) {
+		y += tipoMovimento.getValor();
+	}
+
 }
