@@ -1,5 +1,8 @@
 package br.com.marcelo.marsrover.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,14 +21,31 @@ public class Central {
 		String[] splitPlanalto = entrada.getPlanalto().split(" ");
 
 		Planalto planalto = new Planalto(Integer.parseInt(splitPlanalto[0]), Integer.parseInt(splitPlanalto[1]));
+		List<Rover> rovers = new ArrayList<>();
+		StringBuilder sb = new StringBuilder();
 		for (DadosRover dadosRover : entrada.getDadosRover()) {
 			String[] splitPosicao = dadosRover.getPosicaoInicial().split(" ");
 			Rover rover = new Rover(
 					new Coordenada(Integer.parseInt(splitPosicao[0]), Integer.parseInt(splitPosicao[1])),
 					TipoDirecao.valueOf(TipoDirecao.class, splitPosicao[2]).getDirecao(), planalto);
-			System.out.println("");
+			rovers.add(rover);
+			String acoes = dadosRover.getAcoes();
+			acoes.chars().forEach(c -> {
+				char acao = (char) c;
+				if (acao == 'M')
+					rover.moveAFrente();
+
+				if (acao == 'L')
+					rover.viraAEsquerda();
+
+				if (acao == 'R')
+					rover.viraADireita();
+
+			});
+			sb.append(rover.getPosicao());
+			sb.append("\n");
 		}
-		return "hello";
+		return sb.toString();
 	}
 
 }
