@@ -2,8 +2,6 @@ package br.com.marcelo.marsrover.rover;
 
 public class North implements Direcao {
 
-	private TipoDirecao tipoDirecao = TipoDirecao.N;
-
 	public Direcao viraADireita() {
 		return new East();
 
@@ -14,7 +12,7 @@ public class North implements Direcao {
 	}
 
 	public TipoDirecao getTipoDirecao() {
-		return tipoDirecao;
+		return TipoDirecao.N;
 	}
 
 	public void movimenta(Coordenada coordenada) {
