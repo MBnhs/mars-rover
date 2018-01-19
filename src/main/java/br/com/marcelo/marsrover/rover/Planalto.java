@@ -8,12 +8,13 @@ import java.util.Map;
 import br.com.marcelo.marsrover.exception.ColisaoException;
 import br.com.marcelo.marsrover.exception.ForaDaMalhaException;
 
-public class Planalto {
+public class Planalto extends Mediado {
 
 	private List<Coordenada> malha;
-	Map<Coordenada, Rover> mapa;
+	Map<Coordenada, Boolean> mapa;
 
-	public Planalto(int x, int y) {
+	public Planalto(int x, int y, Mediador mediador) {
+		super(mediador);
 		malha = new ArrayList<>();
 
 		for (int base = 0; base <= x; base++) {
@@ -24,19 +25,26 @@ public class Planalto {
 		mapa = new HashMap<>();
 	}
 
-	public boolean isMovimentacaoPossivel(Coordenada coordenada) {
-		
-		return true;
-	}
-
-	public void recebe(Rover rover) throws ColisaoException, ForaDaMalhaException {
-		if (!isDentroDaMalha(rover.getCoordenada())) {
+	public void atualiza(Coordenada coordenada) throws ColisaoException, ForaDaMalhaException {
+		if (!isDentroDaMalha(coordenada)) {
 			throw new ForaDaMalhaException("Impossível pousar, coordenada definida fora da malha!");
 		}
-		if (!isPosicaoVaga(rover.getCoordenada())) {
+		if (!isPosicaoVaga(coordenada)) {
 			throw new ColisaoException("Impossível pousar, espaço da malha está ocupado!");
 		} else {
-			mapa.put(rover.getCoordenada(), rover);
+			mapa.put(coordenada, true);
+		}
+	}
+
+	public void atualiza(Coordenada atual, Coordenada proxima) throws ColisaoException, ForaDaMalhaException {
+		if (!isDentroDaMalha(proxima)) {
+			throw new ForaDaMalhaException("Impossível movimentar, coordenada definida fora da malha!");
+		}
+		if (!isPosicaoVaga(proxima)) {
+			throw new ColisaoException("Impossível movimentar, espaço da malha está ocupado!");
+		} else {
+			mapa.put(atual, null);
+			mapa.put(proxima, true);
 		}
 	}
 
@@ -48,12 +56,34 @@ public class Planalto {
 		return mapa.get(coordenada) == null;
 	}
 
-	public Map<Coordenada, Rover> getMapa() {
+	public Map<Coordenada, Boolean> getMapa() {
 		return mapa;
 	}
 
-	public void setMapa(Map<Coordenada, Rover> mapa) {
+	public void setMapa(Map<Coordenada, Boolean> mapa) {
 		this.mapa = mapa;
+	}
+
+	public List<Coordenada> getMalha() {
+		return malha;
+	}
+
+	public void setMalha(List<Coordenada> malha) {
+		this.malha = malha;
+	}
+
+	@Override
+	void recebe(Coordenada coordenada) throws ColisaoException, ForaDaMalhaException {
+
+		atualiza(coordenada);
+
+	}
+
+	@Override
+	void recebe(Coordenada atual, Coordenada proxima) throws ColisaoException, ForaDaMalhaException {
+
+			atualiza(atual, proxima);
+
 	}
 
 }

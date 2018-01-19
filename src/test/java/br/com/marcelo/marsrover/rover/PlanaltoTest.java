@@ -14,27 +14,26 @@ public class PlanaltoTest {
 
 	@Before
 	public void setup() {
-		planalto = new Planalto(2, 2);
+		planalto = new Planalto(2, 2, new Estacao());
 	}
 
 	@Test
-	public void deveReceberRover() throws ColisaoException, ForaDaMalhaException {
-		Rover rover = new Rover(new Coordenada(1, 1), new North(), planalto);
-		planalto.recebe(rover);
-		planalto.getMapa().get(rover.getCoordenada());
-		assertNotNull(planalto.getMapa().get(rover.getCoordenada()));
+	public void deveOcuparCoordenada() throws ColisaoException, ForaDaMalhaException {
+		planalto.atualiza(new Coordenada(1, 1));
+		planalto.getMapa().get(new Coordenada(1, 1));
+		assertNotNull(planalto.getMapa().get(new Coordenada(1, 1)));
 	}
 
 	@Test(expected = ColisaoException.class)
-	public void naoDeveReceberRoverNaMesmaPosicao() throws ColisaoException, ForaDaMalhaException {
-		planalto.recebe(new Rover(new Coordenada(1, 1), new North(), planalto));
-		planalto.recebe(new Rover(new Coordenada(1, 1), new North(), planalto));
-		planalto.recebe(new Rover(new Coordenada(0, 1), new North(), planalto));
+	public void naoDeveOcuparCoordenadaNaMesmaPosicao() throws ColisaoException, ForaDaMalhaException {
+		planalto.atualiza(new Coordenada(1, 1));
+		planalto.atualiza(new Coordenada(1, 1));
+		planalto.atualiza(new Coordenada(1, 1));
 	}
 
 	@Test(expected = ForaDaMalhaException.class)
-	public void naoDeveReceberRoverPosicaoForaDaMalha() throws ForaDaMalhaException, ColisaoException {
-		planalto.recebe(new Rover(new Coordenada(3, 3), new North(), planalto));
+	public void naoDeveReceberCoordenadaForaDaMalha() throws ForaDaMalhaException, ColisaoException {
+		planalto.atualiza(new Coordenada(5, 5));
 
 	}
 

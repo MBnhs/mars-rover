@@ -1,15 +1,14 @@
 package br.com.marcelo.marsrover.rover;
 
-public class Rover {
+public class Rover extends Mediado {
 
 	private Coordenada coordenada;
 	private Direcao direcao;
-	private Planalto planalto;
 
-	public Rover(Coordenada coordenada, Direcao direcao, Planalto planalto) {
+	public Rover(Coordenada coordenada, Direcao direcao, Mediador mediador) {
+		super(mediador);
 		this.coordenada = coordenada;
 		this.direcao = direcao;
-		this.planalto = planalto;
 	}
 
 	public Direcao getDirecao() {
@@ -46,8 +45,17 @@ public class Rover {
 	}
 
 	public void moveAFrente() {
-//		planalto.isMovimentacaoPossivel(coordenada);
 		direcao.movimenta(coordenada);
 
+	}
+
+	@Override
+	void recebe(Coordenada coordenada) {
+		return;
+	}
+
+	@Override
+	void recebe(Coordenada atual, Coordenada proxima) {
+		return;		
 	}
 }

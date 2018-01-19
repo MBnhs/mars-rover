@@ -1,40 +1,60 @@
 package br.com.marcelo.marsrover.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.marcelo.marsrover.exception.ColisaoException;
+import br.com.marcelo.marsrover.exception.ForaDaMalhaException;
 import br.com.marcelo.marsrover.rover.Coordenada;
+import br.com.marcelo.marsrover.rover.Estacao;
 import br.com.marcelo.marsrover.rover.Planalto;
 import br.com.marcelo.marsrover.rover.Rover;
 import br.com.marcelo.marsrover.rover.TipoDirecao;
 
 @RestController
-public class Central {
+public class Controller {
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public String post(@RequestBody Entrada entrada) {
+	public String posicionaEntradas(@RequestBody Entrada entrada) {
 		String[] splitPlanalto = entrada.getPlanalto().split(" ");
+		Estacao estacao = new Estacao();
 
-		Planalto planalto = new Planalto(Integer.parseInt(splitPlanalto[0]), Integer.parseInt(splitPlanalto[1]));
-		List<Rover> rovers = new ArrayList<>();
+		Planalto planalto = new Planalto(Integer.parseInt(splitPlanalto[0]), Integer.parseInt(splitPlanalto[1]),
+				estacao);
+
+		estacao.adicionaMediado(planalto);
+
 		StringBuilder sb = new StringBuilder();
+
 		for (DadosRover dadosRover : entrada.getDadosRover()) {
 			String[] splitPosicao = dadosRover.getPosicaoInicial().split(" ");
 			Rover rover = new Rover(
 					new Coordenada(Integer.parseInt(splitPosicao[0]), Integer.parseInt(splitPosicao[1])),
-					TipoDirecao.valueOf(TipoDirecao.class, splitPosicao[2]).getDirecao(), planalto);
-			rovers.add(rover);
+					TipoDirecao.valueOf(TipoDirecao.class, splitPosicao[2]).getDirecao(), estacao);
+			
+			estacao.adicionaMediado(rover);
+
+			try {
+				estacao.envia(rover.getCoordenada(), rover);
+			} catch (ColisaoException | ForaDaMalhaException e) {
+				continue;
+			}
+
 			String acoes = dadosRover.getAcoes();
 			acoes.chars().forEach(c -> {
 				char acao = (char) c;
-				if (acao == 'M')
-					rover.moveAFrente();
-
+				if (acao == 'M') {
+					Coordenada proxima = new Coordenada(rover.getCoordenada().getX(), rover.getCoordenada().getY());
+					rover.getDirecao().movimenta(proxima);
+					try {
+						estacao.envia(rover.getCoordenada(), proxima, rover);
+						rover.moveAFrente();
+					} catch (ColisaoException | ForaDaMalhaException e) {
+						return;
+					}
+				}
 				if (acao == 'L')
 					rover.viraAEsquerda();
 
