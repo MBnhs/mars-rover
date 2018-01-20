@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.marcelo.marsrover.exception.ColisaoException;
 import br.com.marcelo.marsrover.exception.ForaDaMalhaException;
-import br.com.marcelo.marsrover.rover.Coordenada;
+import br.com.marcelo.marsrover.geo.Coordenada;
+import br.com.marcelo.marsrover.geo.TipoDirecao;
 import br.com.marcelo.marsrover.rover.Estacao;
 import br.com.marcelo.marsrover.rover.Planalto;
 import br.com.marcelo.marsrover.rover.Rover;
-import br.com.marcelo.marsrover.rover.TipoDirecao;
 
 @RestController
 public class Controller {
 
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public String posicionaEntradas(@RequestBody Entrada entrada) {
+	@RequestMapping(value = "/rover", method = RequestMethod.POST)
+	public Saida posicionaEntradas(@RequestBody Entrada entrada) {
 		String[] splitPlanalto = entrada.getPlanalto().split(" ");
 		Estacao estacao = new Estacao();
 
@@ -26,14 +26,14 @@ public class Controller {
 
 		estacao.adicionaMediado(planalto);
 
-		StringBuilder sb = new StringBuilder();
+		Saida saida = new Saida();
 
 		for (DadosRover dadosRover : entrada.getDadosRover()) {
 			String[] splitPosicao = dadosRover.getPosicaoInicial().split(" ");
 			Rover rover = new Rover(
 					new Coordenada(Integer.parseInt(splitPosicao[0]), Integer.parseInt(splitPosicao[1])),
 					TipoDirecao.valueOf(TipoDirecao.class, splitPosicao[2]).getDirecao(), estacao);
-			
+
 			estacao.adicionaMediado(rover);
 
 			try {
@@ -62,10 +62,9 @@ public class Controller {
 					rover.viraADireita();
 
 			});
-			sb.append(rover.getPosicao());
-			sb.append("\n");
+			saida.getRovers().add(rover.getPosicao());
 		}
-		return sb.toString();
+		return saida;
 	}
 
 }

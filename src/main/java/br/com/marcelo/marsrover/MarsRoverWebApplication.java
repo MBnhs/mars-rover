@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MarsroverwebApplication {
+public class MarsRoverWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MarsroverwebApplication.class, args);
+		SpringApplication.run(MarsRoverWebApplication.class, args);
 	}
 }

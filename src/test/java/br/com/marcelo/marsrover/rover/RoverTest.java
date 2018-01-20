@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.marcelo.marsrover.geo.Coordenada;
+import br.com.marcelo.marsrover.geo.East;
+import br.com.marcelo.marsrover.geo.North;
+
 public class RoverTest {
 
 	private Rover rover;

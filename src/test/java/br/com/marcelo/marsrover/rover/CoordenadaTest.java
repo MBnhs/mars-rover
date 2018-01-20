@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.marcelo.marsrover.geo.Coordenada;
+import br.com.marcelo.marsrover.geo.TipoMovimento;
+
 public class CoordenadaTest {
 
 	Coordenada coordenada;

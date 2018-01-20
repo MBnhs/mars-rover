@@ -1,5 +1,8 @@
 package br.com.marcelo.marsrover.rover;
 
+import br.com.marcelo.marsrover.geo.Coordenada;
+import br.com.marcelo.marsrover.geo.Direcao;
+
 public class Rover extends Mediado {
 
 	private Coordenada coordenada;

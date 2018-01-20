@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import br.com.marcelo.marsrover.exception.ColisaoException;
 import br.com.marcelo.marsrover.exception.ForaDaMalhaException;
+import br.com.marcelo.marsrover.geo.Coordenada;
 
 public class PlanaltoTest {
 

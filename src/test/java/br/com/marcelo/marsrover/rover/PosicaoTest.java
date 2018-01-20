@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.marcelo.marsrover.geo.Coordenada;
+
 public class PosicaoTest {
 	
 	private Coordenada posicao;

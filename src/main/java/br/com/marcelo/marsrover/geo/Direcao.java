@@ -1,4 +1,4 @@
-package br.com.marcelo.marsrover.rover;
+package br.com.marcelo.marsrover.geo;
 
 public interface Direcao {
 	Direcao viraADireita();

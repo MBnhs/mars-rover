@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.marcelo.marsrover.exception.ColisaoException;
 import br.com.marcelo.marsrover.exception.ForaDaMalhaException;
+import br.com.marcelo.marsrover.geo.Coordenada;
 
 public class Estacao implements Mediador {
 

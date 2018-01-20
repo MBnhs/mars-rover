@@ -7,6 +7,7 @@ import java.util.Map;
 
 import br.com.marcelo.marsrover.exception.ColisaoException;
 import br.com.marcelo.marsrover.exception.ForaDaMalhaException;
+import br.com.marcelo.marsrover.geo.Coordenada;
 
 public class Planalto extends Mediado {
 
