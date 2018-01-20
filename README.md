@@ -23,3 +23,6 @@ http://localhost:8080/mars
         "5 1 E"
     ]
 }
+
+#### Exemplo CURL
+curl -H "Content-Type: application/json" -X POST -d '{ "planalto": "5 5", "dadosRover":[{"posicaoInicial":"1 2 N","acoes":"LMLMLMLMM"}, {"posicaoInicial":"3 3 E","acoes":"MMRMMRMRRM"}] }' http://localhost:8080/mars
