@@ -16,7 +16,7 @@ import br.com.marcelo.marsrover.rover.Rover;
 @RestController
 public class Controller {
 
-	@RequestMapping(value = "/rover", method = RequestMethod.POST)
+	@RequestMapping(value = "/mars", method = RequestMethod.POST)
 	public Saida posicionaEntradas(@RequestBody Entrada entrada) {
 		String[] splitPlanalto = entrada.getPlanalto().split(" ");
 		Estacao estacao = new Estacao();
